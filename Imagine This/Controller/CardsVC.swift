@@ -1,5 +1,5 @@
 //
-//  GeneratorVC.swift
+//  CardsVC.swift
 //  Imagine This
 //
 //  Created by Aleksey on 0516..20.
@@ -8,34 +8,70 @@
 
 import UIKit
 
-class SentenceVC: UIViewController {
+class CardsVC: UIViewController {
 	
 	let words = WordsData()
 	var category: Category!
 	var level: Level!
 	
-	@IBOutlet weak var generatorLabel: UILabel!
-	
-	@IBAction func generateButtonTapped(_ sender: UIButton) {
-		generateSentance(for: category, level: level)
+	@IBAction func reloadCardsDeck(_ sender: UIButton) {
+		generateSentances()
+		setupCards()
 	}
 	
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-		generateSentance(for: category, level: level)
 		title = category.title
-		
+		generateSentances()
+		configureCardsDeckView()
+		setupCards()
     }
 	
 	
-	func generateSentance(for category: Category, level: Level) {
+	var sentances = [String]()
+	let cardsDeckView = UIView()
+	
+	private func setupCards() {
+		
+		sentances.forEach { sentance in
+			let cardView = CardView(frame: .zero)
+			cardView.sentenceLabel.text = sentance
+			cardsDeckView.addSubview(cardView)
+			cardView.fillSuperview()
+		}
+	}
+	
+	
+	private func configureCardsDeckView() {
+		view.addSubview(cardsDeckView)
+		cardsDeckView.translatesAutoresizingMaskIntoConstraints = false
+		
+		NSLayoutConstraint.activate([
+			cardsDeckView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+			//cardsDeckView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+			cardsDeckView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+			cardsDeckView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+			cardsDeckView.heightAnchor.constraint(equalToConstant: 150)
+		])
+	}
+	
+	
+	private func generateSentances() {
+		(0..<10).forEach { _ in
+			sentances.append(generateSentance(for: category, level: level))
+		}
+	}
+	
+	
+	
+	func generateSentance(for category: Category, level: Level) -> String {
 		switch (level, category) {
-			case (.easy, .horror): generatorLabel.text = generateEasyHorrorSentence()
-			case (.easy, .urban): generatorLabel.text = generateEasyUrbanSentence()
-			case (.difficult, .horror): generatorLabel.text = generateHorrorSentence()
-			case (.difficult, .urban): generatorLabel.text = generateUrbanSentence()
-			default: break
+			case (.easy, .horror): return generateEasyHorrorSentence()
+			case (.easy, .urban): return generateEasyUrbanSentence()
+			case (.difficult, .horror): return generateHorrorSentence()
+			case (.difficult, .urban): return generateUrbanSentence()
+			default: return ""
 		}
 	}
 	

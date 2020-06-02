@@ -20,6 +20,7 @@ class CategoryVC: UIViewController {
 		performSegue(withIdentifier: "categorySelected", sender: sender.tag)
 	}
 	
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		configureLevelButtons()
@@ -28,7 +29,7 @@ class CategoryVC: UIViewController {
 	
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if let sentanceVC = segue.destination as? SentenceVC {
+		if let sentanceVC = segue.destination as? CardsVC {
 			sentanceVC.category = Category.init(rawValue: sender as! Int)
 			let selectedButton = levelButtons.filter({ (button) -> Bool in
 				button.isSelected
