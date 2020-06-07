@@ -19,6 +19,11 @@ class CardView: UIView {
 		addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan)))
 	}
 	
+	convenience init(rotationAngle: CGFloat) {
+		self.init()
+		self.transform = CGAffineTransform(rotationAngle: rotationAngle)
+	}
+	
 	
 	@objc private func handlePan(gesture: UIPanGestureRecognizer) {
 		
@@ -64,9 +69,11 @@ class CardView: UIView {
 	
 	private func configure() {
 		translatesAutoresizingMaskIntoConstraints = false
-		layer.cornerRadius = 15
-		clipsToBounds = true
+		//layer.cornerRadius = 15
+		//clipsToBounds = true
 		backgroundColor = .systemPink
+		layer.borderWidth = 1
+		//layer.border.color
 		
 		
 	}
