@@ -11,19 +11,11 @@ import Foundation
 
 enum Level: String, CaseIterable {
 	case easy
-	case moderate
 	case difficult
 }
 
 
-enum Category: Int {
-	case horror
-	case urban
-	
-	var title: String {
-		switch self {
-			case .horror: return "HORROR"
-			case .urban: return "URBAN"
-		}
-	}
+enum Category: String, CaseIterable {
+	case horror = "Horror"
+	case urban = "Urban"
 }

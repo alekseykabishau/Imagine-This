@@ -10,33 +10,74 @@ import UIKit
 
 class CategoryVC: UIViewController {
 	
-	let easyButton = LevelButton(level: .easy)
-	let difficultButton = LevelButton(level: .difficult)
-	
-	var levelButtons = [UIButton]()
-	
-	
-	@IBAction func categoryButtonTapped(_ sender: UIButton) {		
-		performSegue(withIdentifier: "categorySelected", sender: sender.tag)
+	enum Section {
+		case category
 	}
 	
+	let easyButton = LevelButton(level: .easy)
+	let difficultButton = LevelButton(level: .difficult)
+	var levelButtons = [UIButton]()
+	
+	let categories = Category.allCases
+	
+	
+	@IBOutlet weak var collectionView: UICollectionView!
+	var dataSource: UICollectionViewDiffableDataSource<Section, Category>!
+
+	
+	@IBAction func startButtonTapped(_ sender: UIButton) {
+		guard let visibleCategoryIndexPath = collectionView.indexPathsForVisibleItems.first else { print("can't get indexPath"); return }
+		let selectedLevelButton = levelButtons.filter { $0.isSelected }.first
+		let selectedLevel = selectedLevelButton!.currentTitle!
+		print("\(categories[visibleCategoryIndexPath.item]) + \(selectedLevel)")
+	}
+
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		configureLevelButtons()
 		view.backgroundColor = .systemTeal
+		
+		collectionView.collectionViewLayout = configureLayout()
+		configureDataSource()
 	}
 	
 	
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if let sentanceVC = segue.destination as? CardsVC {
-			sentanceVC.category = Category.init(rawValue: sender as! Int)
-			let selectedButton = levelButtons.filter({ (button) -> Bool in
-				button.isSelected
-				}).first!
-			sentanceVC.level = Level.init(rawValue: selectedButton.currentTitle!)
-		}
+	func configureDataSource() {
+		dataSource = UICollectionViewDiffableDataSource<Section, Category>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, category) -> UICollectionViewCell? in
+			
+			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.reuseIdentifier, for: indexPath) as? CategoryCell else { fatalError("Cannot create new cell") }
+			
+			cell.categoryLabel.text = category.rawValue
+			return cell
+		})
+		
+		var initialSnapshot = NSDiffableDataSourceSnapshot<Section, Category>()
+		initialSnapshot.appendSections([.category])
+		initialSnapshot.appendItems(categories, toSection: .category)
+		dataSource.apply(initialSnapshot, animatingDifferences: false, completion: nil)
 	}
+	
+	
+	func configureLayout() -> UICollectionViewCompositionalLayout {
+		
+		let itemSize = NSCollectionLayoutSize(
+			widthDimension: .fractionalWidth(1.0),
+			heightDimension: .fractionalHeight(1.0))
+		let item = NSCollectionLayoutItem(layoutSize: itemSize)
+		item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+		
+		let groupSize = NSCollectionLayoutSize(
+			widthDimension: .fractionalWidth(1.0),
+			heightDimension: .fractionalHeight(1.0))
+		let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+		
+		let section = NSCollectionLayoutSection(group: group)
+		section.orthogonalScrollingBehavior = .paging
+		
+		return UICollectionViewCompositionalLayout(section: section)
+	}
+	
 	
 	
 	@objc func selectLevel() {
@@ -67,5 +108,5 @@ class CategoryVC: UIViewController {
 			difficultButton.widthAnchor.constraint(equalToConstant: 100),
 			difficultButton.heightAnchor.constraint(equalToConstant: 40)
 		])
-	}
+	}	
 }

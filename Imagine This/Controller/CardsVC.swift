@@ -22,7 +22,7 @@ class CardsVC: UIViewController {
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-		title = category.title
+		title = category.rawValue
 		generateSentances()
 		configureCardsDeckView()
 		setupCards()
@@ -71,7 +71,6 @@ class CardsVC: UIViewController {
 			case (.easy, .urban): return generateEasyUrbanSentence()
 			case (.difficult, .horror): return generateHorrorSentence()
 			case (.difficult, .urban): return generateUrbanSentence()
-			default: return ""
 		}
 	}
 	
