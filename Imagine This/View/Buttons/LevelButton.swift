@@ -40,7 +40,7 @@ class LevelButton: UIButton {
 	
 	override var isSelected: Bool {
 		didSet {
-			backgroundColor = isSelected ? .systemPink : .clear
+			backgroundColor = isSelected ? .systemBlue : .clear
 		}
 	}
 }

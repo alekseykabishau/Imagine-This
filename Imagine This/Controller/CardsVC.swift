@@ -69,6 +69,8 @@ class CardsVC: UIViewController {
 		switch (level, category) {
 			case (.easy, .horror): return generateEasyHorrorSentence()
 			case (.easy, .urban): return generateEasyUrbanSentence()
+			case (.moderate, .horror): return generateHorrorSentence() // the same as difficult
+			case (.moderate, .urban): return generateUrbanSentence()
 			case (.difficult, .horror): return generateHorrorSentence()
 			case (.difficult, .urban): return generateUrbanSentence()
 		}
