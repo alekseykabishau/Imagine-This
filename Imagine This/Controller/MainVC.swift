@@ -13,8 +13,8 @@ class MainVC: UIViewController {
 	lazy var imageView = BGImageView(frame: view.bounds)
 	let stackView = UIStackView()
 	let easyLevelButton = LevelButton(level: .easy)
-	let moderateButton = LevelButton(level: .normal)
-	let difficultButton = LevelButton(level: .hard)
+	let normalLevelButton = LevelButton(level: .normal)
+	let hardLevelButton = LevelButton(level: .hard)
 	let startButton = StartButton(frame: .zero)
 	
 	enum Section { case main }
@@ -77,13 +77,13 @@ class MainVC: UIViewController {
 		stackView.distribution = .fillEqually
 		stackView.spacing = 10
 		stackView.addArrangedSubview(easyLevelButton)
-		stackView.addArrangedSubview(moderateButton)
-		stackView.addArrangedSubview(difficultButton)
+		stackView.addArrangedSubview(normalLevelButton)
+		stackView.addArrangedSubview(hardLevelButton)
 		
 		easyLevelButton.isSelected = true // add user defaults to save user's selection
 		easyLevelButton.addTarget(self, action: #selector(selectLevel), for: .touchUpInside)
-		moderateButton.addTarget(self, action: #selector(selectLevel), for: .touchUpInside)
-		difficultButton.addTarget(self, action: #selector(selectLevel), for: .touchUpInside)
+		normalLevelButton.addTarget(self, action: #selector(selectLevel), for: .touchUpInside)
+		hardLevelButton.addTarget(self, action: #selector(selectLevel), for: .touchUpInside)
 	}
 	
 	@objc private func selectLevel(sender: UIButton) {
