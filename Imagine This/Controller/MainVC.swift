@@ -20,6 +20,7 @@ class MainVC: UIViewController {
 	enum Section { case main }
 	
 	let categories = Category.allCases
+	let levels = Level.allCases
 	var collectionView: UICollectionView!
 	var datasource: UICollectionViewDiffableDataSource<Section, Category>!
 	
@@ -97,8 +98,8 @@ class MainVC: UIViewController {
 		print(#function)
 		guard let visibleCategoryIndexPath = collectionView.indexPathsForVisibleItems.first else { print("can't get indexPath"); return }
 		let buttons = stackView.arrangedSubviews as! [UIButton]
-		let selectedLevelButton = buttons.filter { $0.isSelected }.first
-		let selectedLevel = selectedLevelButton!.currentTitle!
+		let selectedLevelButtonIndex = buttons.firstIndex { $0.isSelected }
+		let selectedLevel = levels[selectedLevelButtonIndex!]
 		print("\(categories[visibleCategoryIndexPath.item]) + \(selectedLevel)")
 	}
 	
