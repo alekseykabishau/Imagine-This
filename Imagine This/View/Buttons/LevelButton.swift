@@ -23,24 +23,14 @@ class LevelButton: UIButton {
 	
 	convenience init(level: Level) {
 		self.init(frame: .zero)
-		self.setTitle(level.rawValue, for: .normal)
+		setImage(UIImage(named: level.rawValue), for: .normal)
+		setImage(UIImage(named: "\(level.rawValue)_active"), for: .selected)
 	}
 	
 	
 	private func configure() {
 		translatesAutoresizingMaskIntoConstraints = false
-		layer.cornerRadius = 10
-		layer.borderWidth = 2
-		layer.borderColor = UIColor.white.cgColor
-		setTitleColor(.white, for: .normal)
-		titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
+		imageView?.contentMode = .scaleAspectFit
 		isSelected = false
-	}
-	
-	
-	override var isSelected: Bool {
-		didSet {
-			backgroundColor = isSelected ? .systemBlue : .clear
-		}
 	}
 }

@@ -11,8 +11,8 @@ import Foundation
 
 enum Level: String, CaseIterable {
 	case easy
-	case moderate
-	case difficult
+	case normal
+	case hard
 }
 
 

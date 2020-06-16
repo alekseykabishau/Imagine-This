@@ -13,8 +13,8 @@ class MainVC: UIViewController {
 	lazy var imageView = BGImageView(frame: view.bounds)
 	let stackView = UIStackView()
 	let easyLevelButton = LevelButton(level: .easy)
-	let moderateButton = LevelButton(level: .moderate)
-	let difficultButton = LevelButton(level: .difficult)
+	let moderateButton = LevelButton(level: .normal)
+	let difficultButton = LevelButton(level: .hard)
 	let startButton = StartButton(frame: .zero)
 	
 	enum Section { case main }
