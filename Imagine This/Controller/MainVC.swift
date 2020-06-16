@@ -10,6 +10,7 @@ import UIKit
 
 class MainVC: UIViewController {
 	
+	lazy var imageView = BGImageView(frame: view.bounds)
 	let stackView = UIStackView()
 	let easyLevelButton = LevelButton(level: .easy)
 	let moderateButton = LevelButton(level: .moderate)
@@ -34,6 +35,7 @@ class MainVC: UIViewController {
 	
 	
 	func layoutUI() {
+		view.addSubview(imageView)
 		view.addSubview(stackView)
 		view.addSubview(collectionView)
 		view.addSubview(startButton)
