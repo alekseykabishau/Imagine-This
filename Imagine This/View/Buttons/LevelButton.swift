@@ -23,8 +23,8 @@ class LevelButton: UIButton {
 	
 	convenience init(level: Level) {
 		self.init(frame: .zero)
-		setImage(UIImage(named: level.rawValue), for: .normal)
-		setImage(UIImage(named: "\(level.rawValue)_active"), for: .selected)
+		setImage(level.image, for: .normal)
+		setImage(level.selectedImage, for: .selected)
 	}
 	
 	

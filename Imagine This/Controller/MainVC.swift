@@ -62,10 +62,10 @@ class MainVC: UIViewController {
 	}
 	
 	
-	
 	func configureViewController() {
 		view.backgroundColor = .systemTeal
 	}
+	
 	
 	private func addActionToStartButton() {
 		startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
@@ -86,6 +86,7 @@ class MainVC: UIViewController {
 		normalLevelButton.addTarget(self, action: #selector(selectLevel), for: .touchUpInside)
 		hardLevelButton.addTarget(self, action: #selector(selectLevel), for: .touchUpInside)
 	}
+	
 	
 	@objc private func selectLevel(sender: UIButton) {
 		let buttons = stackView.arrangedSubviews as! [UIButton]
@@ -129,7 +130,7 @@ class MainVC: UIViewController {
 		datasource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { (collectionView, indexPath, category) -> UICollectionViewCell? in
 			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.reuseIdentifier, for: indexPath) as? CategoryCell else { fatalError("Cannot create new cell") }
 			//cell.label.text = category.rawValue
-			cell.imageView.image = UIImage(named: category.rawValue)
+			cell.imageView.image = category.image
 			return cell
 		})
 		
@@ -138,6 +139,7 @@ class MainVC: UIViewController {
 		initialSnapshot.appendItems(categories, toSection: .main)
 		datasource.apply(initialSnapshot, animatingDifferences: false, completion: nil)
 	}
+	
 	
 	private func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
 		
@@ -157,5 +159,4 @@ class MainVC: UIViewController {
 		
 		return UICollectionViewCompositionalLayout(section: section)
 	}
-
 }

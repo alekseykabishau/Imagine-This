@@ -6,17 +6,29 @@
 //  Copyright © 2020 Aleksey Kabishau. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 
 enum Level: String, CaseIterable {
 	case easy
 	case normal
 	case hard
+	
+	var image: UIImage? {
+		return UIImage(named: self.rawValue)
+	}
+	
+	var selectedImage: UIImage? {
+		return UIImage(named: "\(self.rawValue)_selected")
+	}
 }
 
 
 enum Category: String, CaseIterable {
-	case horror = "Horror"
-	case urban = "Urban"
+	case horror
+	case urban
+	
+	var image: UIImage? {
+		return UIImage(named: self.rawValue)
+	}
 }
