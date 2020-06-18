@@ -10,23 +10,20 @@ import UIKit
 
 class CardsVC: UIViewController {
 	
+	lazy var backgroundimageView = BGImageView(frame: view.bounds)
 	let words = WordsData()
 	var category: Category!
 	var level: Level!
-	
-	@IBAction func reloadCardsDeck(_ sender: UIButton) {
-		generateSentances()
-		setupCards()
-	}
-	
+		
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-		title = category.rawValue
+		title = "\(category.rawValue) + \(level.rawValue)"
+		view.addSubview(backgroundimageView)
 		generateSentances()
 		configureCardsDeckView()
 		setupCards()
-    }
+	}
 	
 	
 	var sentances = [String]()

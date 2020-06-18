@@ -95,12 +95,21 @@ class MainVC: UIViewController {
 	
 	
 	@objc private func startButtonTapped() {
-		print(#function)
+		performSegue(withIdentifier: "showCardVC", sender: nil)
+	}
+	
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		guard let visibleCategoryIndexPath = collectionView.indexPathsForVisibleItems.first else { print("can't get indexPath"); return }
 		let buttons = stackView.arrangedSubviews as! [UIButton]
 		let selectedLevelButtonIndex = buttons.firstIndex { $0.isSelected }
 		let selectedLevel = levels[selectedLevelButtonIndex!]
-		print("\(categories[visibleCategoryIndexPath.item]) + \(selectedLevel)")
+		if segue.identifier == "showCardVC" {
+			if let cardVC = segue.destination as? CardsVC {
+				cardVC.level = selectedLevel
+				cardVC.category = categories[visibleCategoryIndexPath.item]
+			}
+		}
 	}
 	
 	
