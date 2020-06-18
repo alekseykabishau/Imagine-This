@@ -35,7 +35,8 @@ class CardsVC: UIViewController {
 	private func setupCards() {
 		
 		sentances.forEach { sentance in
-			let cardView = CardView(frame: .zero)
+			let randomAngle = CGFloat.random(in: -(CGFloat.pi / 18)...(CGFloat.pi / 18))
+			let cardView = CardView(rotationAngle: randomAngle)
 			cardView.sentenceLabel.text = sentance
 			cardsDeckView.addSubview(cardView)
 			cardView.fillSuperview()
@@ -58,7 +59,8 @@ class CardsVC: UIViewController {
 	
 	
 	private func generateSentances() {
-		(0..<10).forEach { _ in
+		sentances = []
+		(0..<5).forEach { _ in
 			sentances.append(generateSentance(for: category, level: level))
 		}
 	}
