@@ -68,7 +68,7 @@ class MainVC: UIViewController {
 	
 	
 	private func addActionToStartButton() {
-		startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
+		startButton.addTarget(self, action: #selector(startButtonTapped(_:)), for: .touchUpInside)
 	}
 	
 	
@@ -95,8 +95,14 @@ class MainVC: UIViewController {
 	}
 	
 	
-	@objc private func startButtonTapped() {
-		performSegue(withIdentifier: "showCardVC", sender: nil)
+	@objc private func startButtonTapped(_ sender: UIButton) {
+		if let button = sender as? StartButton {
+			button.pulsate()
+		}
+		
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+			self.performSegue(withIdentifier: "showCardVC", sender: nil)
+		}
 	}
 	
 	

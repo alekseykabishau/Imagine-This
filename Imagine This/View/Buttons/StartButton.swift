@@ -23,6 +23,18 @@ class StartButton: UIButton {
 	
 	private func configure() {
 		translatesAutoresizingMaskIntoConstraints = false
+		adjustsImageWhenHighlighted = false
 		setImage(UIImage(named: "start"), for: .normal)
+	}
+	
+	
+	func pulsate() {
+		let pulse = CABasicAnimation(keyPath: "transform.scale")
+		pulse.duration = 0.1
+		pulse.fromValue = 1
+		pulse.toValue = 0.95
+		pulse.autoreverses = true
+		
+		layer.add(pulse, forKey: "pulse")
 	}
 }
