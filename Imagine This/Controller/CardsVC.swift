@@ -27,6 +27,19 @@ class CardsVC: UIViewController {
 		generateSentances()
 		configureCardsDeckView()
 		setupCards()
+		
+		backButton.addTarget(self, action: #selector(backButtonTapped(_:)), for: .touchUpInside)
+	}
+	
+	
+	@objc private func backButtonTapped(_ sender: UIButton) {
+		if let button = sender as? BackButton {
+			button.pulsate()
+		}
+		
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+			self.dismiss(animated: true)
+		}
 	}
 	
 	
