@@ -13,7 +13,6 @@ class CardsVC: UIViewController {
 	lazy var backgroundimageView = BGImageView(frame: view.bounds)
 	let backButton = BackButton(frame: .zero)
 	let grassImageView = UIImageView(image: UIImage(named: "grass"))
-	let cardsDeckView = UIView()
 	
 	let words = WordsData()
 	var category: Category!
