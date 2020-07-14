@@ -11,6 +11,10 @@ import UIKit
 class CardsVC: UIViewController {
 	
 	lazy var backgroundimageView = BGImageView(frame: view.bounds)
+	let backButton = BackButton(frame: .zero)
+	let grassImageView = UIImageView(image: UIImage(named: "grass"))
+	let cardsDeckView = UIView()
+	
 	let words = WordsData()
 	var category: Category!
 	var level: Level!
@@ -18,11 +22,38 @@ class CardsVC: UIViewController {
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-		title = "\(category.rawValue) + \(level.rawValue)"
-		view.addSubview(backgroundimageView)
+		layoutUI()
+		//title = "\(category.rawValue) + \(level.rawValue)"
+		
 		generateSentances()
 		configureCardsDeckView()
 		setupCards()
+	}
+	
+	
+	private func layoutUI() {
+		
+		grassImageView.translatesAutoresizingMaskIntoConstraints = false
+		
+		
+		view.addSubview(backgroundimageView)
+		view.addSubview(backButton)
+		view.addSubview(grassImageView)
+		
+		
+		NSLayoutConstraint.activate([
+			
+			backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
+			backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+			//TODO: - work on size
+			backButton.widthAnchor.constraint(equalToConstant: 150),
+			backButton.heightAnchor.constraint(equalToConstant: 50),
+			
+			grassImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+			grassImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+			grassImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+			grassImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5)
+		])
 	}
 	
 	
