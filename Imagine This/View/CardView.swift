@@ -10,11 +10,13 @@ import UIKit
 
 class CardView: UIView {
 	
+	let backgroundImageView = UIImageView()
 	let sentenceLabel = UILabel()
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
-		configure()
+		//configure()
+		configureImageView()
 		configureSentenceLabel()
 		addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan)))
 	}
@@ -67,17 +69,26 @@ class CardView: UIView {
 	}
 	
 	
-	private func configure() {
-		translatesAutoresizingMaskIntoConstraints = false
-		//layer.cornerRadius = 15
-		//clipsToBounds = true
-		backgroundColor = .systemPink
-		layer.borderWidth = 1
-		//layer.border.color
-		
-		
-	}
+//	private func configure() {
+//		//translatesAutoresizingMaskIntoConstraints = false
+//
+//		//layer.cornerRadius = 15
+//		//clipsToBounds = true
+//		//backgroundColor = .systemPink
+//		//layer.borderWidth = 1
+//		//layer.border.color
+//
+//
+//	}
 	
+
+	private func configureImageView() {
+		backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+		addSubview(backgroundImageView)
+		backgroundImageView.fillSuperview()
+		backgroundImageView.image = UIImage(named: "card")
+		backgroundImageView.clipsToBounds = true
+	}
 	
 	private func configureSentenceLabel() {
 		sentenceLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -85,6 +96,6 @@ class CardView: UIView {
 		sentenceLabel.centerInSuperview(size: CGSize(width: 250, height: 100))
 		sentenceLabel.numberOfLines = 0
 		sentenceLabel.textAlignment = .center
-		sentenceLabel.backgroundColor = .systemTeal
+		//sentenceLabel.backgroundColor = .systemTeal
 	}
 }
