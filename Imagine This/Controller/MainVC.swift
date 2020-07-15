@@ -88,6 +88,7 @@ class MainVC: UIViewController {
 	}
 	
 	
+	//TODO: - fix ability to double click the button
 	@objc private func selectLevel(sender: UIButton) {
 		let buttons = stackView.arrangedSubviews as! [UIButton]
 		buttons.forEach { $0.isSelected = false }

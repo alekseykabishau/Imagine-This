@@ -1,13 +1,12 @@
 //
-//  Sentence.swift
+//  Level.swift
 //  Imagine This
 //
-//  Created by Aleksey on 0517..20.
+//  Created by Aleksey on 0715..20.
 //  Copyright © 2020 Aleksey Kabishau. All rights reserved.
 //
 
 import UIKit
-
 
 enum Level: String, CaseIterable {
 	case easy
@@ -20,15 +19,5 @@ enum Level: String, CaseIterable {
 	
 	var selectedImage: UIImage? {
 		return UIImage(named: "\(self.rawValue)_selected")
-	}
-}
-
-
-enum Category: String, CaseIterable {
-	case horror
-	case urban
-	
-	var image: UIImage? {
-		return UIImage(named: self.rawValue)
 	}
 }
