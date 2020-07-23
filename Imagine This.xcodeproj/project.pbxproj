@@ -21,6 +21,7 @@
 		5BC11A4D24BD518B00BE4B0F /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC11A4C24BD518B00BE4B0F /* BackButton.swift */; };
 		5BC11A5324BFC71900BE4B0F /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC11A5224BFC71900BE4B0F /* Level.swift */; };
 		5BC11A5524BFC73800BE4B0F /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC11A5424BFC73800BE4B0F /* Category.swift */; };
+		5BC11A5824BFFA2D00BE4B0F /* SentenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC11A5724BFFA2D00BE4B0F /* SentenceManager.swift */; };
 		5BECAC1E248F455900B6AF63 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BECAC1D248F455900B6AF63 /* MainVC.swift */; };
 		5BECAC22248FF54A00B6AF63 /* StartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BECAC21248FF54A00B6AF63 /* StartButton.swift */; };
 		5BF5C7BE2470E69A00739F18 /* CardsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF5C7BD2470E69A00739F18 /* CardsVC.swift */; };
@@ -43,6 +44,7 @@
 		5BC11A4C24BD518B00BE4B0F /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		5BC11A5224BFC71900BE4B0F /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		5BC11A5424BFC73800BE4B0F /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		5BC11A5724BFFA2D00BE4B0F /* SentenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentenceManager.swift; sourceTree = "<group>"; };
 		5BECAC1D248F455900B6AF63 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		5BECAC21248FF54A00B6AF63 /* StartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButton.swift; sourceTree = "<group>"; };
 		5BF5C7BD2470E69A00739F18 /* CardsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsVC.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 		5B288E79246F835F006E8A41 /* Imagine This */ = {
 			isa = PBXGroup;
 			children = (
+				5BC11A5624BFF41600BE4B0F /* Manager */,
 				5BC11A4F24BD628100BE4B0F /* Extensions */,
 				5BF5C7BA2470E20C00739F18 /* Model */,
 				5BF5C7BB2470E21600739F18 /* View */,
@@ -93,6 +96,14 @@
 				5B69429F24859725003BDFD5 /* UIView+Ext.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5BC11A5624BFF41600BE4B0F /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				5BC11A5724BFFA2D00BE4B0F /* SentenceManager.swift */,
+			);
+			name = Manager;
 			sourceTree = "<group>";
 		};
 		5BECAC1F248F47B000B6AF63 /* Cells */ = {
@@ -233,6 +244,7 @@
 				5BC11A5324BFC71900BE4B0F /* Level.swift in Sources */,
 				5B6FD805249871EA00A9255C /* BGImageView.swift in Sources */,
 				5B61D11D247B3BBE00D13797 /* WordsData.swift in Sources */,
+				5BC11A5824BFFA2D00BE4B0F /* SentenceManager.swift in Sources */,
 				5BC11A5524BFC73800BE4B0F /* Category.swift in Sources */,
 				5BECAC22248FF54A00B6AF63 /* StartButton.swift in Sources */,
 				5B6942A024859725003BDFD5 /* UIView+Ext.swift in Sources */,

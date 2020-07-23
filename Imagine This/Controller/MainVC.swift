@@ -114,8 +114,9 @@ class MainVC: UIViewController {
 		let selectedLevel = levels[selectedLevelButtonIndex!]
 		if segue.identifier == "showCardVC" {
 			if let cardVC = segue.destination as? CardsVC {
-				cardVC.level = selectedLevel
-				cardVC.category = categories[visibleCategoryIndexPath.item]
+				cardVC.sentenceManager = SentenceManager(category: categories[visibleCategoryIndexPath.item], level: selectedLevel)
+				//cardVC.level = selectedLevel
+				//cardVC.category = categories[visibleCategoryIndexPath.item]
 			}
 		}
 	}
