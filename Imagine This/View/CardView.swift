@@ -41,18 +41,32 @@ class CardView: UIView {
 	
 	private func handleChanged(_ gesture: UIPanGestureRecognizer) {
 		let translation = gesture.translation(in: self)
-		self.transform = CGAffineTransform(translationX: translation.x, y: 0)
+		//TODO: - how keep rotation angle during pan gesture?; now it removes rotation and that why transform.identity doesn't work if card is not being dismissed
+		self.transform = CGAffineTransform(translationX: translation.x, y: translation.y)
 	}
 	
 	
+	//TODO: - Refactor
 	private func handleEnd(_ gesture: UIPanGestureRecognizer) {
 		let threshold: CGFloat = self.frame.width / 3
-		let translationDirection: CGFloat = gesture.translation(in: nil).x > 0 ? 1 : -1
-		let shouldDismissCard = abs(gesture.translation(in: nil).x) > threshold
+		//TODO: - make it multidirectional; make it propotional, so card removal follows the pan gesture direction;
+		// test case - vertical drag
+		let horizontalTranslationDirection: CGFloat = gesture.translation(in: nil).x > 0 ? 1 : -1
+		let verticalTranslationDirection: CGFloat = gesture.translation(in: nil).y > 0 ? 1 : -1
+		
+		var shouldDismissCard: Bool {
+			if abs(gesture.translation(in: nil).x) > threshold {
+				return true
+			} else if abs(gesture.translation(in: nil).y) > threshold {
+				return true
+			}
+			return false
+		}
 		
 		UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
 			if shouldDismissCard {
-				self.transform = self.transform.translatedBy(x: 600 * translationDirection, y: 0)
+				//TODO: - make transformation smother
+				self.transform = self.transform.translatedBy(x: 600 * horizontalTranslationDirection, y: 600 * verticalTranslationDirection)
 			} else {
 				self.transform = .identity
 			}
@@ -67,19 +81,6 @@ class CardView: UIView {
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
-	
-	
-//	private func configure() {
-//		//translatesAutoresizingMaskIntoConstraints = false
-//
-//		//layer.cornerRadius = 15
-//		//clipsToBounds = true
-//		//backgroundColor = .systemPink
-//		//layer.borderWidth = 1
-//		//layer.border.color
-//
-//
-//	}
 	
 
 	private func configureImageView() {
