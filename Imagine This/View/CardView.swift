@@ -12,10 +12,10 @@ class CardView: UIView {
 	
 	let backgroundImageView = UIImageView()
 	let sentenceLabel = UILabel()
+	var rotationAngle: CGFloat? // should it be optional? - check this logic when init with specific logic will be updated
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
-		//configure()
 		configureImageView()
 		configureSentenceLabel()
 		addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan)))
@@ -23,6 +23,7 @@ class CardView: UIView {
 	
 	convenience init(rotationAngle: CGFloat) {
 		self.init()
+		self.rotationAngle = rotationAngle
 		self.transform = CGAffineTransform(rotationAngle: rotationAngle)
 	}
 	
@@ -41,14 +42,14 @@ class CardView: UIView {
 	
 	private func handleChanged(_ gesture: UIPanGestureRecognizer) {
 		let translation = gesture.translation(in: self)
-		//TODO: - how keep rotation angle during pan gesture?; now it removes rotation and that why transform.identity doesn't work if card is not being dismissed
-		self.transform = CGAffineTransform(translationX: translation.x, y: translation.y)
+		let rotationalTransformation = CGAffineTransform(rotationAngle: self.rotationAngle ?? 0)
+		self.transform = rotationalTransformation.translatedBy(x: translation.x, y: translation.y)
 	}
 	
 	
 	//TODO: - Refactor
 	private func handleEnd(_ gesture: UIPanGestureRecognizer) {
-		let threshold: CGFloat = self.frame.width / 3
+		let threshold: CGFloat = self.frame.width / 5
 		//TODO: - make it multidirectional; make it propotional, so card removal follows the pan gesture direction;
 		// test case - vertical drag
 		let horizontalTranslationDirection: CGFloat = gesture.translation(in: nil).x > 0 ? 1 : -1
@@ -68,7 +69,7 @@ class CardView: UIView {
 				//TODO: - make transformation smother
 				self.transform = self.transform.translatedBy(x: 600 * horizontalTranslationDirection, y: 600 * verticalTranslationDirection)
 			} else {
-				self.transform = .identity
+				self.transform = CGAffineTransform.identity.rotated(by: self.rotationAngle ?? 0)
 			}
 		}) { (_) in
 			if shouldDismissCard {
